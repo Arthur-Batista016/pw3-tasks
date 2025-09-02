@@ -30,18 +30,11 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<TaskResponseDTO> DeleteById(@PathVariable Long id){
-        var  existe = service.findTaskById(id);
-        if(existe.isPresent()){
-            if(existe.get().getStatus() == StatusEnum.PENDING) {
-                service.DeleteListById(id);
-                return ResponseEntity.noContent().build();
-            }else {
-                throw new RuntimeException("Tarefa em Andamento");
-            }
-        }else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<Void> DeleteById(@PathVariable Long id){
+        if(service.DeleteListById(id)){
+            return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
 }

@@ -35,4 +35,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
+
+    public boolean isPending(){
+        return status.equals(StatusEnum.PENDING);
+    }
+
 }

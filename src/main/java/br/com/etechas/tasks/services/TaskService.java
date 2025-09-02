@@ -39,9 +39,17 @@ public class TaskService {
 
     }
 
-    public void DeleteListById(Long id) {
+    public boolean DeleteListById(Long id) {
+        var tarefa = repository.findById(id);
 
-        repository.deleteById(id);
+        if(tarefa.isEmpty()){
+            return false;
+        }if(tarefa.get().isPending()){
+            repository.deleteById(id);
+            return true;
+        }
+        throw new RuntimeException("Erro");
+
     }
 
 
