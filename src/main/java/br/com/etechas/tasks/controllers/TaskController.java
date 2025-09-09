@@ -1,6 +1,7 @@
 package br.com.etechas.tasks.controllers;
 
 
+import br.com.etechas.tasks.dto.PostTaskResponseDto;
 import br.com.etechas.tasks.dto.TaskResponseDTO;
 import br.com.etechas.tasks.entity.Task;
 import br.com.etechas.tasks.entity.enums.StatusEnum;
@@ -37,10 +38,10 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/Post")
-    public ResponseEntity<TaskResponseDTO> postTask(@RequestBody TaskResponseDTO task){
+    @PostMapping
+    public ResponseEntity<PostTaskResponseDto> postTask(@RequestBody PostTaskResponseDto task){
         service.postTask(task);
-        return ResponseEntity.ok(task);
+        return ResponseEntity.ok().build();
     }
 
 }

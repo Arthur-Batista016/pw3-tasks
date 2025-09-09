@@ -1,5 +1,6 @@
 package br.com.etechas.tasks.mapper;
 
+import br.com.etechas.tasks.dto.PostTaskResponseDto;
 import br.com.etechas.tasks.dto.TaskResponseDTO;
 import br.com.etechas.tasks.entity.Task;
 import org.hibernate.sql.ast.tree.from.TableReference;
@@ -17,4 +18,6 @@ public interface TaskMapper {
 
     //converte uma lista de tarefa em tarefas dto
     List<TaskResponseDTO> toResponseDTOList(List<Task> tarefa);
+
+    Task toEntity(PostTaskResponseDto dto);
 }

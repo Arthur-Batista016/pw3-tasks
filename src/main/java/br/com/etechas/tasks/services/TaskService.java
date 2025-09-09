@@ -1,5 +1,6 @@
 package br.com.etechas.tasks.services;
 
+import br.com.etechas.tasks.dto.PostTaskResponseDto;
 import br.com.etechas.tasks.dto.TaskResponseDTO;
 import br.com.etechas.tasks.entity.Task;
 import br.com.etechas.tasks.entity.enums.StatusEnum;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityReturnValueHandler;
 
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,17 +55,13 @@ public class TaskService {
 
     }
 
-    public TaskResponseDTO postTask(TaskResponseDTO task){
-        var exists = repository.findById(task.id());
-        if(exists.isPresent()){
-            throw new RuntimeException("Tarefa não encontrada");
-        }else {
-            return task;
-            
+    public PostTaskResponseDto postTask(PostTaskResponseDto task){
+        Task tarefa = taskMapper.toEntity(task);
+        tarefa.setStatus(StatusEnum.PENDING);
+        if(tarefa.getDueDate().equals(LocalDate.now())){
+
         }
-
-
-
+        throw new RuntimeException("Apenas permitido tarefas para o dia de hoje");
     }
 
 
