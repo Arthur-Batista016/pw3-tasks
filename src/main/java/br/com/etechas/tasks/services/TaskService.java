@@ -52,5 +52,18 @@ public class TaskService {
 
     }
 
+    public TaskResponseDTO postTask(TaskResponseDTO task){
+        var exists = repository.findById(task.id());
+        if(exists.isPresent()){
+            throw new RuntimeException("Tarefa não encontrada");
+        }else {
+            return task;
+            
+        }
+
+
+
+    }
+
 
 }

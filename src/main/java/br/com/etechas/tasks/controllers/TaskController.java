@@ -37,4 +37,10 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/Post")
+    public ResponseEntity<TaskResponseDTO> postTask(@RequestBody TaskResponseDTO task){
+        service.postTask(task);
+        return ResponseEntity.ok(task);
+    }
+
 }
