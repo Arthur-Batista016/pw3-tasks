@@ -59,7 +59,7 @@ public class TaskService {
         Task tarefa = taskMapper.toEntity(task);
         tarefa.setStatus(StatusEnum.PENDING);
         if(tarefa.getDueDate().equals(LocalDate.now())){
-
+            tarefa = repository.save(tarefa); // salva no banco
         }
         throw new RuntimeException("Apenas permitido tarefas para o dia de hoje");
     }
